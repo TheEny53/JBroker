@@ -16,7 +16,6 @@ import dhbwka.wwi.vertsys.javaee.jbroker.common.jpa.User;
 import dhbwka.wwi.vertsys.javaee.jbroker.common.web.FormValues;
 import dhbwka.wwi.vertsys.javaee.jbroker.common.web.WebUtils;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -73,6 +72,8 @@ public class PasswordChangeServlet extends HttpServlet {
             errors.add("Passwort ist falsch.");
         if(!pw1.equals(pw2) && pw1 != null && pw2 != null)
             errors.add("Passwörter stimmen nicht überein.");
+        if(pw1.length() < 6 | pw1.length() >64)
+            errors.add("Passwort muss zwischen sechs und 64 Zeichen lang sein.");
         if(errors.isEmpty())    {
             user.setPassword(pw1);
             userbean.update(user);
@@ -85,14 +86,5 @@ public class PasswordChangeServlet extends HttpServlet {
             response.sendRedirect(request.getRequestURI());
         }
     }
-
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }
