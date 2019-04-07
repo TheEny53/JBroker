@@ -50,7 +50,7 @@ public class PasswordChangeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/admin/password.jsp");
+        request.getRequestDispatcher("/WEB-INF/admin/password.jsp").forward(request, response);
     } 
 
     /** 
