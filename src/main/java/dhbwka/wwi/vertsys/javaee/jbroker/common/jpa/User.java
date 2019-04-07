@@ -77,8 +77,6 @@ public class User implements Serializable {
     @Column(name = "GROUPNAME")
     List<String> groups = new ArrayList<>();
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    List<Task> tasks = new ArrayList<>();
 
     //<editor-fold defaultstate="collapsed" desc="Konstruktoren">
     public User() {
@@ -103,13 +101,31 @@ public class User implements Serializable {
         this.username = id;
     }
 
-    public List<Task> getTasks() {
-        return tasks;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
+    public String getLastname() {
+        return lastname;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+  
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Passwort setzen und prüfen">

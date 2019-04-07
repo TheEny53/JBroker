@@ -52,6 +52,9 @@
 
                 <c:if test="${not empty pageContext.request.userPrincipal}">
                     <div class="menuitem">
+                        <a href="<c:url value="/app/account/"/>" class="">Nutzer bearbeiten</a>
+                    </div>
+                    <div class="menuitem">
                         <a href="<c:url value="/logout/"/>" class="icon-logout">Logout ${pageContext.request.userPrincipal.name}</a>
                     </div>
                 </c:if>
