@@ -13,6 +13,8 @@ import dhbwka.wwi.vertsys.javaee.jbroker.common.ejb.EntityBean;
 import dhbwka.wwi.vertsys.javaee.jbroker.finance.jpa.FinanceProd;
 import dhbwka.wwi.vertsys.javaee.jbroker.finance.jpa.FinanceProdCat;
 import dhbwka.wwi.vertsys.javaee.jbroker.finance.jpa.ProductStatus;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
@@ -57,7 +59,7 @@ public class FinanceProdBean extends EntityBean<FinanceProd, Long> {
      * @param amount Amount of purchased products (optional)
      * @return List with retrieved Finance Products
      */
-    public List<FinanceProd> search(String search, FinanceProdCat category, String isin, String exchangeName, String amount, ProductStatus status) {
+    public List<FinanceProd> search(String search, FinanceProdCat category, String isin, String exchangeName, String amount, ProductStatus status, String username) {
         CriteriaBuilder cb = this.em.getCriteriaBuilder();
 
         //Select p from products
@@ -96,10 +98,19 @@ public class FinanceProdBean extends EntityBean<FinanceProd, Long> {
             p = cb.and(p, cb.equal(from.get("status"), status));
             query.where(p);
         }
-
        
 
 
-        return em.createQuery(query).getResultList();
+        List<FinanceProd> returnList = em.createQuery(query).getResultList();
+        List<FinanceProd> finalList = new ArrayList<>();
+        Iterator<FinanceProd> it = returnList.iterator();
+        while(it.hasNext()){
+            FinanceProd pr = it.next();
+            if(pr.getOwner().getUsername().equals(username)){
+                finalList.add(pr);
+            }
+    }
+        
+        return finalList;
     }
 }

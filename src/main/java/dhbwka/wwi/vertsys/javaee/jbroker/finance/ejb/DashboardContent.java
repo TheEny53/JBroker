@@ -9,6 +9,7 @@
  */
 package dhbwka.wwi.vertsys.javaee.jbroker.finance.ejb;
 
+import dhbwka.wwi.vertsys.javaee.jbroker.common.ejb.UserBean;
 import dhbwka.wwi.vertsys.javaee.jbroker.common.web.WebUtils;
 import dhbwka.wwi.vertsys.javaee.jbroker.dashboard.ejb.DashboardContentProvider;
 import dhbwka.wwi.vertsys.javaee.jbroker.dashboard.ejb.DashboardSection;
@@ -33,6 +34,9 @@ public class DashboardContent implements DashboardContentProvider{
     
     @EJB
     private FinanceProdCatBean catbean;
+    
+    @EJB
+    private UserBean userbean;
 
     @Override
     public void createDashboardContent(List<DashboardSection> sections) {
@@ -90,7 +94,7 @@ public class DashboardContent implements DashboardContentProvider{
         return section;
     }
     private DashboardTile createTile(FinanceProdCat category, ProductStatus status, String label, String cssClass, String icon) {
-        int amount = finprodbean.search(null, category,null,null,null, status).size();
+        int amount = finprodbean.search(null, category,null,null,null, status, userbean.getCurrentUser().getUsername()).size();
         String href = "/app/finance/productlist";
 
         if (category != null) {

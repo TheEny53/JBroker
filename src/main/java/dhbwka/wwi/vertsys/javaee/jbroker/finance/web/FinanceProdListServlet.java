@@ -9,6 +9,7 @@
  */
 package dhbwka.wwi.vertsys.javaee.jbroker.finance.web;
 
+import dhbwka.wwi.vertsys.javaee.jbroker.common.ejb.UserBean;
 import dhbwka.wwi.vertsys.javaee.jbroker.finance.ejb.FinanceProdBean;
 import dhbwka.wwi.vertsys.javaee.jbroker.finance.ejb.FinanceProdCatBean;
 import dhbwka.wwi.vertsys.javaee.jbroker.finance.jpa.FinanceProd;
@@ -27,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author D070512
  */
-@WebServlet(urlPatterns = {"/app/finance/productlist/"})
+@WebServlet(urlPatterns = {"/app/finance/productlist"})
 public class FinanceProdListServlet extends HttpServlet {
 
     @EJB
@@ -36,6 +37,9 @@ public class FinanceProdListServlet extends HttpServlet {
     @EJB
     private FinanceProdBean prodbean;
 
+    @EJB
+    private UserBean userbean;
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -81,7 +85,7 @@ public class FinanceProdListServlet extends HttpServlet {
 
         }
         
-        List<FinanceProd> prods = this.prodbean.search(searchText, category, isin, exchange_name, amount, status);
+        List<FinanceProd> prods = this.prodbean.search(searchText, category, isin, exchange_name, amount, status, userbean.getCurrentUser().getUsername());
         request.setAttribute("prods", prods);
         request.getRequestDispatcher("/WEB-INF/finance/financeprodlist.jsp").forward(request, response);
     }
