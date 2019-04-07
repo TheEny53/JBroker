@@ -10,6 +10,7 @@
 package dhbwka.wwi.vertsys.javaee.jbroker.common.ejb;
 
 import dhbwka.wwi.vertsys.javaee.jbroker.common.jpa.User;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJBContext;
@@ -101,6 +102,14 @@ public class UserBean {
     public User update(User user) {
         return em.merge(user);
     }
+    
+     public User getUserByUsername(String username){
+        List result = em.createQuery("SELECT u FROM User u WHERE u.username = :username")
+                 .setParameter("username", username)
+                 .getResultList();
+        return (User)result.get(0);
+    }
+
 
     /**
      * Fehler: Der Benutzername ist bereits vergeben

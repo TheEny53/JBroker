@@ -41,7 +41,7 @@
                 <label>Risikokategorie</label>
                 <div class="side-by-side" value="${signup_form.values["risk_category"][0]}">
                     <select name="risk_category" onchange="">
-                        <option value="RK_0">RK_0</option>
+                        <option value="RK_N">RK_N</option>
                         <option value="RK_1">RK_1</option>
                         <option value="RK_2">RK_2</option>
                         <option value="RK_3">RK_3</option>
