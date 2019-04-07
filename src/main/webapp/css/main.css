@@ -58,7 +58,7 @@ header, main {
 
 /* Titelzeile */
 #titlebar {
-    color: rgb(60, 169, 201)    ;
+        color: rgb(60, 169, 201)    ;
     font-size: 260%;
     margin-bottom: 1rem;
 }
