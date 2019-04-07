@@ -11,7 +11,6 @@ package dhbwka.wwi.vertsys.javaee.jbroker.finance.ejb;
 
 import dhbwka.wwi.vertsys.javaee.jbroker.common.ejb.EntityBean;
 import dhbwka.wwi.vertsys.javaee.jbroker.finance.jpa.FinanceProdCat;
-import dhbwka.wwi.vertsys.javaee.jbroker.tasks.jpa.Category;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;

@@ -20,13 +20,13 @@
                 Produkt bearbeiten
             </c:when>
             <c:otherwise>
-                Pordukt anlegen
+                Produkt anlegen
             </c:otherwise>
         </c:choose>
     </jsp:attribute>
 
     <jsp:attribute name="head">
-        <link rel="stylesheet" href="<c:url value="/css/task_edit.css"/>" />
+        <link rel="stylesheet" href="<c:url value="/css/prod_edit.css"/>" />
     </jsp:attribute>
 
     <jsp:attribute name="menu">

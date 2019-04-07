@@ -1,8 +1,12 @@
-<%-- 
-    Document   : financeprodlist
-    Created on : Apr 7, 2019, 11:03:49 AM
-    Author     : D070512
---%>
+<%--
+ * Copyright Â© 2019 Anika Schmidt, Enzo Hilzinger, Marvin GÃ¶ckel
+ * 
+ * E-Mail: enzo.hilzinger@sap.com
+ * Webseite: https://www.sap.com/
+ * 
+ * Dieser Quellcode ist lizenziert unter einer
+ * Creative Commons Namensnennung 4.0 International Lizenz.
+ --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -25,7 +29,7 @@
         </div>
 
         <div class="menuitem">
-            <a href="<c:url value="/app/finance/financeprodedit/new/"/>">Finanzprodukt erstellen</a>
+            <a href="<c:url value="/app/finance/financeprodedit/new"/>">Finanzprodukt erstellen</a>
         </div>
 
         <div class="menuitem">

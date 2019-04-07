@@ -95,7 +95,7 @@ public class DashboardContent implements DashboardContentProvider{
     }
     private DashboardTile createTile(FinanceProdCat category, ProductStatus status, String label, String cssClass, String icon) {
         int amount = finprodbean.search(null, category,null,null,null, status, userbean.getCurrentUser().getUsername()).size();
-        String href = "/app/finance/productlist";
+        String href = "/app/finance/productlist/";
 
         if (category != null) {
             href = WebUtils.addQueryParameter(href, "search_category", "" + category.getId());

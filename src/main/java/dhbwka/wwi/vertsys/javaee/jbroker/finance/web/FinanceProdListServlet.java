@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author D070512
  */
-@WebServlet(urlPatterns = {"/app/finance/productlist"})
+@WebServlet(urlPatterns = {"/app/finance/productlist/"})
 public class FinanceProdListServlet extends HttpServlet {
 
     @EJB

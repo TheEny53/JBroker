@@ -17,7 +17,6 @@ import dhbwka.wwi.vertsys.javaee.jbroker.finance.ejb.FinanceProdBean;
 import dhbwka.wwi.vertsys.javaee.jbroker.finance.ejb.FinanceProdCatBean;
 import dhbwka.wwi.vertsys.javaee.jbroker.finance.jpa.FinanceProd;
 import dhbwka.wwi.vertsys.javaee.jbroker.finance.jpa.ProductStatus;
-import dhbwka.wwi.vertsys.javaee.jbroker.tasks.jpa.TaskStatus;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -39,6 +38,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet(urlPatterns = {"/app/finance/financeprodedit/*"})
 public class FinanceProdEditServlet extends HttpServlet {
 
+    private static final long serialVersionUID = 102831973239L;
+    
     @EJB
     FinanceProdBean finprodbean;
     
@@ -162,7 +163,7 @@ public class FinanceProdEditServlet extends HttpServlet {
         }
         if (errors.isEmpty()) {
             // Keine Fehler: Startseite aufrufen
-            response.sendRedirect(WebUtils.appUrl(request, "/app/finance/productlist"));
+            response.sendRedirect(WebUtils.appUrl(request, "/app/finance/productlist/"));
         } else {
             FormValues formValues = new FormValues();
             formValues.setValues(request.getParameterMap());
@@ -183,7 +184,7 @@ public class FinanceProdEditServlet extends HttpServlet {
         this.finprodbean.delete(prod);
 
         // Zurück zur Übersicht
-        response.sendRedirect(WebUtils.appUrl(request, "/app/finance/productlist"));
+        response.sendRedirect(WebUtils.appUrl(request, "/app/finance/productlist/"));
     
     }
 
