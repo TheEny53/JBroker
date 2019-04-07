@@ -15,7 +15,7 @@
 
 <template:base>
     <jsp:attribute name="title">
-        Dashboard
+        Finanzproduktübersicht
     </jsp:attribute>
 
     <jsp:attribute name="head">
@@ -24,15 +24,15 @@
 
     <jsp:attribute name="menu">
         <div class="menuitem">
-            <a href="<c:url value="/app/tasks/list/"/>">Liste</a>
+            <a href="<c:url value="/app/finance/productlist/"/>">Finanzproduktliste</a>
         </div>
 
         <div class="menuitem">
-            <a href="<c:url value="/app/tasks/task/new/"/>">Aufgabe anlegen</a>
+            <a href="<c:url value="/app/finance/financeprodedit/new"/>">Neues Produkt erstellen</a>
         </div>
 
         <div class="menuitem">
-            <a href="<c:url value="/app/tasks/categories/"/>">Kategorien bearbeiten</a>
+            <a href="<c:url value="/app/finance/categorylist"/>">Finanzproduktkategorien</a>
         </div>
     </jsp:attribute>
 
@@ -44,7 +44,7 @@
                 </p>
             </c:when>
             <c:otherwise>
-                <jsp:useBean id="utils" class="dhbwka.wwi.vertsys.javaee.jtodo.common.web.WebUtils"/>
+                <jsp:useBean id="utils" class="dhbwka.wwi.vertsys.javaee.jbroker.common.web.WebUtils"/>
 
                 <c:forEach items="${sections}" var="section">
                     <h2>
