@@ -7,7 +7,7 @@
  * Dieser Quellcode ist lizenziert unter einer
  * Creative Commons Namensnennung 4.0 International Lizenz.
  */
-package dhbwka.wwi.vertsys.javaee.jtodo.common.ejb;
+package dhbwka.wwi.vertsys.javaee.jbroker.common.ejb;
 
 import java.util.List;
 import javax.persistence.EntityManager;

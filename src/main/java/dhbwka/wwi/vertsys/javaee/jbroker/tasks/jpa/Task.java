@@ -7,9 +7,9 @@
  * Dieser Quellcode ist lizenziert unter einer
  * Creative Commons Namensnennung 4.0 International Lizenz.
  */
-package dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa;
+package dhbwka.wwi.vertsys.javaee.jbroker.tasks.jpa;
 
-import dhbwka.wwi.vertsys.javaee.jtodo.common.jpa.User;
+import dhbwka.wwi.vertsys.javaee.jbroker.common.jpa.User;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;

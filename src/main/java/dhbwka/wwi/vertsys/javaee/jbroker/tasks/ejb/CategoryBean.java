@@ -7,10 +7,10 @@
  * Dieser Quellcode ist lizenziert unter einer
  * Creative Commons Namensnennung 4.0 International Lizenz.
  */
-package dhbwka.wwi.vertsys.javaee.jtodo.tasks.ejb;
+package dhbwka.wwi.vertsys.javaee.jbroker.tasks.ejb;
 
-import dhbwka.wwi.vertsys.javaee.jtodo.common.ejb.EntityBean;
-import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Category;
+import dhbwka.wwi.vertsys.javaee.jbroker.common.ejb.EntityBean;
+import dhbwka.wwi.vertsys.javaee.jbroker.tasks.jpa.Category;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;

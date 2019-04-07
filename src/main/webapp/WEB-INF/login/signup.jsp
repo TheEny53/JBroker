@@ -17,7 +17,7 @@
 
 <template:base>
     <jsp:attribute name="title">
-        Registrierung
+        Account erstellen
     </jsp:attribute>
 
     <jsp:attribute name="head">
@@ -44,6 +44,38 @@
                     </label>
                     <div class="side-by-side">
                         <input type="text" name="signup_username" value="${signup_form.values["signup_username"][0]}">
+                    </div>
+
+                    <label for="signup_title">
+                        Titel:
+                        <span class="required">*</span>
+                    </label>
+                    <div class="side-by-side" value="${signup_form.values["signup_title"][0]}">
+                        <select name="signup_title" onchange="">
+                            <option value=" ">Keine Angabe</option>
+                            <option value="Dr.">Dr.</option>
+                            <option value="Dr. med.">Dr. med.</option>
+                            <option value="Dr. rer. nat.">Dr. rer. nat.</option>
+                            <option value="Prof.">Prof.</option>
+                            <option value="Prof. Dr.">Prof. Dr.</option>
+                            <option value="Prof. Dr. Mult.">Prof. Dr. Mult.</option>
+                        </select>
+                    </div>
+
+                    <label for="signup_firstname">
+                        Vorname:
+                        <span class="required">*</span>
+                    </label>
+                    <div class="side-by-side">
+                        <input type="text" name="signup_firstname" value="${signup_form.values["signup_firstname"][0]}">
+                    </div>
+
+                    <label for="signup_lastname">
+                        Nachname:
+                        <span class="required">*</span>
+                    </label>
+                    <div class="side-by-side">
+                        <input type="text" name="signup_lastname" value="${signup_form.values["signup_lastname"][0]}">
                     </div>
 
                     <label for="signup_password1">

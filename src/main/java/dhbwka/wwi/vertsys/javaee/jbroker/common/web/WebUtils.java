@@ -7,7 +7,7 @@
  * Dieser Quellcode ist lizenziert unter einer
  * Creative Commons Namensnennung 4.0 International Lizenz.
  */
-package dhbwka.wwi.vertsys.javaee.jtodo.common.web;
+package dhbwka.wwi.vertsys.javaee.jbroker.common.web;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

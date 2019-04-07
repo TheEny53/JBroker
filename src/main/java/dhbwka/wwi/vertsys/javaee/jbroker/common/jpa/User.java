@@ -7,9 +7,9 @@
  * Dieser Quellcode ist lizenziert unter einer
  * Creative Commons Namensnennung 4.0 International Lizenz.
  */
-package dhbwka.wwi.vertsys.javaee.jtodo.common.jpa;
+package dhbwka.wwi.vertsys.javaee.jbroker.common.jpa;
 
-import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Task;
+import dhbwka.wwi.vertsys.javaee.jbroker.tasks.jpa.Task;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -34,7 +34,7 @@ import javax.validation.constraints.Size;
  * Datenbankklasse für einen Benutzer.
  */
 @Entity
-@Table(name = "JTODO_USER")
+@Table(name = "JBROKER_USER")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,8 +45,20 @@ public class User implements Serializable {
     @Size(min = 5, max = 64, message = "Der Benutzername muss zwischen fünf und 64 Zeichen lang sein.")
     @NotNull(message = "Der Benutzername darf nicht leer sein.")
     private String username;
-    
+
+    @Column(name = "FIRSTNAME", length = 64)
+    @NotNull(message = "Vorname darf nicht leer sein.")
+    private String firstname;
+
+    @Column(name = "LASTNAME", length = 64)
+    @NotNull(message = "Nachname darf nicht leer sein.")
+    private String lastname;
+
+    @Column(name = "TITLE", length = 8)
+    private String title;
+
     public class Password {
+
         @Size(min = 6, max = 64, message = "Das Passwort muss zwischen sechs und 64 Zeichen lang sein.")
         public String password = "";
     }
@@ -57,9 +69,9 @@ public class User implements Serializable {
     @NotNull(message = "Das Passwort darf nicht leer sein.")
     private String passwordHash;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
-            name = "JTODO_USER_GROUP",
+            name = "JBROKER_USER_GROUP",
             joinColumns = @JoinColumn(name = "USERNAME")
     )
     @Column(name = "GROUPNAME")
@@ -72,8 +84,11 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String title, String firstname, String lastname) {
         this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.title = title;
         this.password.password = password;
         this.passwordHash = this.hashPassword(password);
     }
@@ -136,10 +151,10 @@ public class User implements Serializable {
      * Berechnet einen Hashwert aus dem übergebenen Passwort und legt ihn im
      * Feld passwordHash ab. Somit wird das Passwort niemals als Klartext
      * gespeichert.
-     * 
+     *
      * Gleichzeitig wird das Passwort im nicht gespeicherten Feld password
-     * abgelegt, um durch die Bean Validation Annotationen überprüft werden
-     * zu können.
+     * abgelegt, um durch die Bean Validation Annotationen überprüft werden zu
+     * können.
      *
      * @param password Neues Passwort
      */
@@ -150,12 +165,13 @@ public class User implements Serializable {
 
     /**
      * Nur für die Validierung bei einer Passwortänderung!
+     *
      * @return Neues, beim Speichern gesetztes Passwort
      */
     public Password getPassword() {
         return this.password;
     }
-    
+
     /**
      * Prüft, ob das übergebene Passwort korrekt ist.
      *

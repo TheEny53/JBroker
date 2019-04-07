@@ -7,9 +7,9 @@
  * Dieser Quellcode ist lizenziert unter einer
  * Creative Commons Namensnennung 4.0 International Lizenz.
  */
-package dhbwka.wwi.vertsys.javaee.jtodo.common.ejb;
+package dhbwka.wwi.vertsys.javaee.jbroker.common.ejb;
 
-import dhbwka.wwi.vertsys.javaee.jtodo.common.jpa.User;
+import dhbwka.wwi.vertsys.javaee.jbroker.common.jpa.User;
 import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJBContext;
@@ -25,7 +25,7 @@ public class UserBean {
 
     @PersistenceContext
     EntityManager em;
-    
+
     @Resource
     EJBContext ctx;
 
@@ -39,23 +39,34 @@ public class UserBean {
     }
 
     /**
+     * Datenbankobjekt eines beliebigen Benutzers auslesen.
+     *
+     * @param username Gesuchter Benutzername
+     * @return Benutzer-Entity oder null
+     */
+    public User findByUsername(String username) {
+        return this.em.find(User.class, username);
+    }
+
+    /**
      *
      * @param username
      * @param password
      * @throws UserBean.UserAlreadyExistsException
      */
-    public void signup(String username, String password) throws UserAlreadyExistsException {
+    public void signup(String username, String password, String firstname, String lastname, String title) throws UserAlreadyExistsException {
         if (em.find(User.class, username) != null) {
             throw new UserAlreadyExistsException("Der Benutzername $B ist bereits vergeben.".replace("$B", username));
         }
 
-        User user = new User(username, password);
+        User user = new User(username, password, title, firstname, lastname);
         user.addToGroup("app-user");
         em.persist(user);
     }
 
     /**
      * Passwort ändern (ohne zu speichern)
+     *
      * @param user
      * @param oldPassword
      * @param newPassword
@@ -69,18 +80,20 @@ public class UserBean {
 
         user.setPassword(newPassword);
     }
-    
+
     /**
      * Benutzer löschen
+     *
      * @param user Zu löschender Benutzer
      */
     @RolesAllowed("app-user")
     public void delete(User user) {
         this.em.remove(user);
     }
-    
+
     /**
      * Benutzer aktualisieren
+     *
      * @param user Zu aktualisierender Benutzer
      * @return Gespeicherter Benutzer
      */

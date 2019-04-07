@@ -7,14 +7,14 @@
  * Dieser Quellcode ist lizenziert unter einer
  * Creative Commons Namensnennung 4.0 International Lizenz.
  */
-package dhbwka.wwi.vertsys.javaee.jtodo.tasks.web;
+package dhbwka.wwi.vertsys.javaee.jbroker.tasks.web;
 
-import dhbwka.wwi.vertsys.javaee.jtodo.common.web.FormValues;
-import dhbwka.wwi.vertsys.javaee.jtodo.tasks.ejb.CategoryBean;
-import dhbwka.wwi.vertsys.javaee.jtodo.tasks.ejb.TaskBean;
-import dhbwka.wwi.vertsys.javaee.jtodo.common.ejb.ValidationBean;
-import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Category;
-import dhbwka.wwi.vertsys.javaee.jtodo.tasks.jpa.Task;
+import dhbwka.wwi.vertsys.javaee.jbroker.common.web.FormValues;
+import dhbwka.wwi.vertsys.javaee.jbroker.tasks.ejb.CategoryBean;
+import dhbwka.wwi.vertsys.javaee.jbroker.tasks.ejb.TaskBean;
+import dhbwka.wwi.vertsys.javaee.jbroker.common.ejb.ValidationBean;
+import dhbwka.wwi.vertsys.javaee.jbroker.tasks.jpa.Category;
+import dhbwka.wwi.vertsys.javaee.jbroker.tasks.jpa.Task;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;

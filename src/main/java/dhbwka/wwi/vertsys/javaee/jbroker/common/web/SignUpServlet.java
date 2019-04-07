@@ -7,11 +7,11 @@
  * Dieser Quellcode ist lizenziert unter einer
  * Creative Commons Namensnennung 4.0 International Lizenz.
  */
-package dhbwka.wwi.vertsys.javaee.jtodo.common.web;
+package dhbwka.wwi.vertsys.javaee.jbroker.common.web;
 
-import dhbwka.wwi.vertsys.javaee.jtodo.common.ejb.ValidationBean;
-import dhbwka.wwi.vertsys.javaee.jtodo.common.ejb.UserBean;
-import dhbwka.wwi.vertsys.javaee.jtodo.common.jpa.User;
+import dhbwka.wwi.vertsys.javaee.jbroker.common.ejb.ValidationBean;
+import dhbwka.wwi.vertsys.javaee.jbroker.common.ejb.UserBean;
+import dhbwka.wwi.vertsys.javaee.jbroker.common.jpa.User;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;
@@ -29,53 +29,56 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(urlPatterns = {"/signup/"})
 public class SignUpServlet extends HttpServlet {
-    
+
     @EJB
     ValidationBean validationBean;
-            
+
     @EJB
     UserBean userBean;
-    
+
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         // Anfrage an dazugerhörige JSP weiterleiten
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/login/signup.jsp");
         dispatcher.forward(request, response);
-        
+
         // Alte Formulardaten aus der Session entfernen
         HttpSession session = request.getSession();
         session.removeAttribute("signup_form");
     }
-    
+
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         // Formulareingaben auslesen        
         String username = request.getParameter("signup_username");
         String password1 = request.getParameter("signup_password1");
         String password2 = request.getParameter("signup_password2");
-        
+        String firstname = request.getParameter("signup_firstname");
+        String lastname = request.getParameter("signup_lastname");
+        String title = request.getParameter("signup_title");
+
         // Eingaben prüfen
-        User user = new User(username, password1);
+        User user = new User(username, password1, title, firstname, lastname);
         List<String> errors = this.validationBean.validate(user);
         this.validationBean.validate(user.getPassword(), errors);
-        
+
         if (password1 != null && password2 != null && !password1.equals(password2)) {
             errors.add("Die beiden Passwörter stimmen nicht überein.");
         }
-        
+
         // Neuen Benutzer anlegen
         if (errors.isEmpty()) {
             try {
-                this.userBean.signup(username, password1);
+                this.userBean.signup(username, password1, firstname, lastname, title);
             } catch (UserBean.UserAlreadyExistsException ex) {
                 errors.add(ex.getMessage());
             }
         }
-        
+
         // Weiter zur nächsten Seite
         if (errors.isEmpty()) {
             // Keine Fehler: Startseite aufrufen
@@ -86,12 +89,12 @@ public class SignUpServlet extends HttpServlet {
             FormValues formValues = new FormValues();
             formValues.setValues(request.getParameterMap());
             formValues.setErrors(errors);
-            
+
             HttpSession session = request.getSession();
             session.setAttribute("signup_form", formValues);
-            
+
             response.sendRedirect(request.getRequestURI());
         }
     }
-    
+
 }
